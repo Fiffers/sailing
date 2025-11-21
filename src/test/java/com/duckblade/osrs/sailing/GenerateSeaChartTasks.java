@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class GenerateSeaChartTasks
@@ -18,6 +19,7 @@ public class GenerateSeaChartTasks
 	private static final String OBJECT_ID_1_URL = "https://github.com/runelite/runelite/raw/refs/heads/master/runelite-api/src/main/java/net/runelite/api/gameval/ObjectID1.java";
 	private static final String NPC_ID_URL = "https://github.com/runelite/runelite/raw/refs/heads/master/runelite-api/src/main/java/net/runelite/api/gameval/NpcID.java";
 
+	@Ignore("TODO")
 	@Test
 	public void generateSeaChartTasksFromCsv() throws Exception
 	{
