@@ -1,6 +1,7 @@
 package com.duckblade.osrs.sailing.features.mes;
 
 import com.duckblade.osrs.sailing.SailingConfig;
+import com.duckblade.osrs.sailing.features.util.SailingUtil;
 import com.duckblade.osrs.sailing.model.CargoHoldTier;
 import com.duckblade.osrs.sailing.module.PluginLifecycleComponent;
 import java.util.Arrays;
@@ -44,8 +45,12 @@ public class PrioritizeCargoHold
 	@Subscribe(priority = -100)
 	public void onPostMenuSort(PostMenuSort e)
 	{
-		Menu menu = client.getMenu();
+		if (!SailingUtil.isSailing(client))
+		{
+			return;
+		}
 
+		Menu menu = client.getMenu();
 		menu.setMenuEntries(
 			Arrays.stream(menu.getMenuEntries())
 				.sorted(MENU_ENTRY_COMPARATOR)
