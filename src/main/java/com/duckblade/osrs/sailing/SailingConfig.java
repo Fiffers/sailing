@@ -37,6 +37,14 @@ public interface SailingConfig extends Config
 	)
 	String SECTION_MES = "mes";
 
+	@ConfigSection(
+		name = "Cargo Hold Tracking",
+		description = "Settings for tracking the contents of your cargo hold.",
+		position = 400,
+		closedByDefault = true
+	)
+	String SECTION_CARGO_HOLD_TRACKING = "cargoHoldTracking";
+
 	enum ShowChartsMode
 	{
 		NONE,
@@ -162,6 +170,18 @@ public interface SailingConfig extends Config
 		position = 2
 	)
 	default boolean prioritizeCargoHold()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "cargoHoldShowCounts",
+		name = "Show Item Count",
+		description = "Shows total item counts over the cargo hold.",
+		section = SECTION_CARGO_HOLD_TRACKING,
+		position = 1
+	)
+	default boolean cargoHoldShowCounts()
 	{
 		return true;
 	}

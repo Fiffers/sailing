@@ -1,5 +1,6 @@
 package com.duckblade.osrs.sailing.features;
 
+import com.duckblade.osrs.sailing.SailingConfig;
 import com.duckblade.osrs.sailing.features.util.BoatTracker;
 import com.duckblade.osrs.sailing.features.util.SailingUtil;
 import com.duckblade.osrs.sailing.model.Boat;
@@ -56,6 +57,8 @@ public class CargoHoldTracker
 	private final Map<Integer, Map<Integer, Integer>> cargoHoldItems = new HashMap<>();
 	private final BoatTracker boatTracker;
 
+	private boolean overlayEnabled;
+
 	@Inject
 	public CargoHoldTracker(Client client, BoatTracker boatTracker)
 	{
@@ -67,6 +70,14 @@ public class CargoHoldTracker
 	}
 
 	@Override
+	public boolean isEnabled(SailingConfig config)
+	{
+		// always on for tracking events, conditionally display
+		overlayEnabled = config.cargoHoldShowCounts();
+		return true;
+	}
+
+	@Override
 	public void shutDown()
 	{
 		cargoHoldItems.clear();
@@ -75,7 +86,7 @@ public class CargoHoldTracker
 	@Override
 	public Dimension render(Graphics2D g)
 	{
-		if (!SailingUtil.isSailing(client))
+		if (!overlayEnabled || !SailingUtil.isSailing(client))
 		{
 			return null;
 		}
