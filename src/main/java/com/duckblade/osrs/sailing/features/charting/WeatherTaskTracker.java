@@ -1,5 +1,6 @@
 package com.duckblade.osrs.sailing.features.charting;
 
+import com.duckblade.osrs.sailing.SailingConfig;
 import com.duckblade.osrs.sailing.features.util.SailingUtil;
 import com.duckblade.osrs.sailing.module.PluginLifecycleComponent;
 import lombok.Getter;
@@ -20,7 +21,8 @@ import javax.inject.Singleton;
 import java.awt.image.BufferedImage;
 
 @Singleton
-public class WeatherTaskTracker implements PluginLifecycleComponent
+public class WeatherTaskTracker
+	implements PluginLifecycleComponent
 {
 
 	@Inject
@@ -45,6 +47,12 @@ public class WeatherTaskTracker implements PluginLifecycleComponent
 
 	// the active task state as indicated by the ID of the last weather device we had in the inventory
 	private int lastState = -1;
+
+	@Override
+	public boolean isEnabled(SailingConfig config)
+	{
+		return config.chartingWeatherSolver();
+	}
 
 	public void shutDown()
 	{

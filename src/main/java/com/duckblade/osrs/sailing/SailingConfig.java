@@ -14,9 +14,17 @@ public interface SailingConfig extends Config
 	String CONFIG_GROUP = "sailing";
 
 	@ConfigSection(
+		name = "Sea Charting",
+		description = "Settings for Sea Charting",
+		position = 100,
+		closedByDefault = true
+	)
+	String SECTION_SEA_CHARTING = "seaCharting";
+
+	@ConfigSection(
 		name = "Barracuda Trials",
 		description = "Settings for Barracuda Trials",
-		position = 100,
+		position = 200,
 		closedByDefault = true
 	)
 	String SECTION_BARRACUDA_TRIALS = "barracudaTrials";
@@ -33,11 +41,52 @@ public interface SailingConfig extends Config
 	@ConfigItem(
 		keyName = "showCharts",
 		name = "Highlight Sea Charting Locations",
-		description = "Highlight nearby sea charting locations."
+		description = "Highlight nearby sea charting locations.",
+		section = SECTION_SEA_CHARTING,
+		position = 1
 	)
 	default ShowChartsMode showCharts()
 	{
 		return ShowChartsMode.UNCHARTED;
+	}
+
+	@ConfigItem(
+		keyName = "chartingUnchartedColor",
+		name = "Uncharted Colour",
+		description = "Colour to highlight nearby uncharted locations.",
+		section = SECTION_SEA_CHARTING,
+		position = 2
+	)
+	@Alpha
+	default Color chartingUnchartedColor()
+	{
+		return Color.GREEN;
+	}
+
+	@ConfigItem(
+		keyName = "chartingChartedColor",
+		name = "Charted Colour",
+		description = "Colour to highlight nearby charted locations.",
+		section = SECTION_SEA_CHARTING,
+		position = 3
+	)
+	@Alpha
+	default Color chartingChartedColor()
+	{
+		return Color.YELLOW;
+	}
+
+	@ConfigItem(
+		keyName = "chartingWeatherSolver",
+		name = "Weather Station Solver",
+		description = "Whether to provide a helper for weather charting.",
+		section = SECTION_SEA_CHARTING,
+		position = 4
+	)
+	@Alpha
+	default boolean chartingWeatherSolver()
+	{
+		return true;
 	}
 
 	@ConfigItem(

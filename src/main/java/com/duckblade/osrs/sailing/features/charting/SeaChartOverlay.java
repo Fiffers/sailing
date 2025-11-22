@@ -31,7 +31,6 @@ import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.OverlayUtil;
-import net.runelite.client.util.ColorUtil;
 
 @Slf4j
 @Singleton
@@ -39,9 +38,6 @@ public class SeaChartOverlay
 	extends Overlay
 	implements PluginLifecycleComponent
 {
-
-	private static final Color COLOR_CHARTABLE_COMPLETED = ColorUtil.colorWithAlpha(Color.YELLOW, 127);
-	private static final Color COLOR_CHARTABLE_INCOMPLETE = Color.GREEN;
 
 	private final Client client;
 	private final ItemManager itemManager;
@@ -51,6 +47,9 @@ public class SeaChartOverlay
 
 	private final Map<GameObject, SeaChartTask> chartObjects = new HashMap<>();
 	private final Map<NPC, SeaChartTask> chartNpcs = new HashMap<>();
+
+	private Color colorCharted;
+	private Color colorUncharted;
 
 	@Inject
 	public SeaChartOverlay(
@@ -74,6 +73,8 @@ public class SeaChartOverlay
 	@Override
 	public boolean isEnabled(SailingConfig config)
 	{
+		colorCharted = config.chartingChartedColor();
+		colorUncharted = config.chartingUnchartedColor();
 		return config.showCharts() != SailingConfig.ShowChartsMode.NONE;
 	}
 
@@ -107,7 +108,7 @@ public class SeaChartOverlay
 			Polygon poly = obj.getCanvasTilePoly();
 			if (poly != null)
 			{
-				Color color = completed ? COLOR_CHARTABLE_COMPLETED : COLOR_CHARTABLE_INCOMPLETE;
+				Color color = completed ? colorCharted : colorUncharted;
 				OverlayUtil.renderPolygon(graphics, poly, color);
 			}
 			OverlayUtil.renderImageLocation(client, graphics, obj.getLocalLocation(), taskIndex.getTaskSprite(task), 0);
