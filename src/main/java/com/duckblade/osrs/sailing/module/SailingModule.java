@@ -5,6 +5,7 @@ import com.duckblade.osrs.sailing.features.CargoHoldTracker;
 import com.duckblade.osrs.sailing.features.LuffOverlay;
 import com.duckblade.osrs.sailing.features.RapidsOverlay;
 import com.duckblade.osrs.sailing.features.barracudatrials.BarracudaTrialHelper;
+import com.duckblade.osrs.sailing.features.charting.CurrentDuckTaskTracker;
 import com.duckblade.osrs.sailing.features.charting.SeaChartOverlay;
 import com.duckblade.osrs.sailing.features.charting.SeaChartPanelOverlay;
 import com.duckblade.osrs.sailing.features.charting.SeaChartTaskIndex;
@@ -40,6 +41,7 @@ public class SailingModule extends AbstractModule
 		BoatTracker boatTracker,
 		CargoHoldTracker cargoHoldTracker,
 		CrewmateOverheadMuter crewmateOverheadMuter,
+		CurrentDuckTaskTracker currentDuckTaskTracker,
 		DeprioSailsOffHelm deprioSailsOffHelm,
 		LuffOverlay luffOverlay,
 		PrioritizeCargoHold prioritizeCargoHold,
@@ -55,6 +57,7 @@ public class SailingModule extends AbstractModule
 			.add(boatTracker)
 			.add(cargoHoldTracker)
 			.add(crewmateOverheadMuter)
+			.add(currentDuckTaskTracker)
 			.add(deprioSailsOffHelm)
 			.add(luffOverlay)
 			.add(prioritizeCargoHold)
