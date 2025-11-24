@@ -59,6 +59,9 @@ public class CargoHoldTracker
 
 	private static final int UNKNOWN_ITEM = -1;
 
+	// todo cargo pickup and dropoff
+	private static final String MES_CARGO_PACK_PERSONAL = "You deposit some cargo into the cargo hold."; // always 1
+	private static final String MES_CARGO_PACK_CREW = "Your crew pack the cargo they were holding into the cargo hold."; // todo determine amount?
 	private static final String MSG_CREWMATE_SALVAGES = "Managed to hook some salvage! I'll put it in the cargo hold.";
 	private static final String MSG_CREWMATE_SALVAGE_FULL = "The cargo hold is full. I can't salvage anything.";
 	private static final String WIDGET_TEXT_CARGO_HOLD_EMPTY = "This cargo hold has no items to show here.";
