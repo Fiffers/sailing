@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import net.runelite.api.Client;
 import net.runelite.api.Perspective;
+import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.CommandExecuted;
@@ -44,19 +45,27 @@ public class SailingDebugTlwpOverlay
 	@Override
 	public Dimension render(Graphics2D graphics)
 	{
-		if (!active)
+		if (!active || !SailingUtil.isSailing(client))
 		{
 			return null;
 		}
 
-		if (SailingUtil.isSailing(client) && boatTracker.getBoat() != null)
+		LocalPoint tllp = boatTracker.getBoat()
+			.getWorldEntity()
+			.transformToMainWorld(boatTracker.getBoat().getHull().getLocalLocation());
+		Point canvasPoint = Perspective.localToCanvas(client, tllp, 0);
+		if (canvasPoint != null)
 		{
-			WorldPoint tlwp = SailingUtil.getTopLevelWorldPoint(client, boatTracker);
-			Polygon poly = Perspective.getCanvasTilePoly(client, Objects.requireNonNull(LocalPoint.fromWorld(client, tlwp)));
-			if (poly != null)
-			{
-				OverlayUtil.renderPolygon(graphics, poly, Color.magenta);
-			}
+			graphics.setColor(Color.PINK);
+			graphics.drawRect(canvasPoint.getX() - 5, canvasPoint.getY() - 5, 10, 10);
+			graphics.drawRect(canvasPoint.getX(), canvasPoint.getY(), 1, 1);
+		}
+
+		WorldPoint tlwp = SailingUtil.getTopLevelWorldPoint(client);
+		Polygon poly = Perspective.getCanvasTilePoly(client, Objects.requireNonNull(LocalPoint.fromWorld(client, tlwp)));
+		if (poly != null)
+		{
+			OverlayUtil.renderPolygon(graphics, poly, Color.magenta);
 		}
 
 		return null;
