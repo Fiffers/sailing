@@ -232,6 +232,18 @@ public interface SailingConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "chartingMermaidSolver",
+		name = "Mermaid Task Solver",
+		description = "Whether to provide a helper for mermaid charting tasks.",
+		section = SECTION_SEA_CHARTING,
+		position = 7
+	)
+	default boolean chartingMermaidSolver()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "barracudaHighlightLostCrates",
 		name = "Highlight Crates",
 		description = "Highlight lost crates that need to be collected during Barracuda Trials.",
