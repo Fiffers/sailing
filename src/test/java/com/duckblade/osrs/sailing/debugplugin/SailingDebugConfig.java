@@ -21,7 +21,7 @@ public interface SailingDebugConfig extends Config
 	@ConfigItem(
 		keyName = "localBoatInfo",
 		name = "Local Boat Info Panel",
-		description = "also toggleable with ::tlwp"
+		description = ""
 	)
 	default boolean localBoatInfo()
 	{
@@ -31,9 +31,19 @@ public interface SailingDebugConfig extends Config
 	@ConfigItem(
 		keyName = "tlwpOverlayDefaultOn",
 		name = "Top Level WP Default On",
-		description = ""
+		description = "also toggleable with ::tlwp"
 	)
 	default boolean tlwpOverlayDefaultOn()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "routeOverlayDefaultOn",
+		name = "Route Default On",
+		description = "also toggleable with ::route"
+	)
+	default boolean routeOverlayDefaultOn()
 	{
 		return true;
 	}

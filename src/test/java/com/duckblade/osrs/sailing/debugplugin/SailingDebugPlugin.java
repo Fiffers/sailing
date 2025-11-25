@@ -38,6 +38,9 @@ public class SailingDebugPlugin extends Plugin
 	@Inject
 	private SailingDebugTlwpOverlay tlwpOverlay;
 
+	@Inject
+	private SailingDebugRouteOverlay routeOverlay;
+
 	private List<?> components;
 
 	@Override
@@ -46,7 +49,8 @@ public class SailingDebugPlugin extends Plugin
 		components = Arrays.asList(
 			boatInfoOverlayPanel,
 			localBoatInfoOverlayPanel,
-			tlwpOverlay
+			tlwpOverlay,
+			routeOverlay
 		);
 
 		components.forEach(c ->
